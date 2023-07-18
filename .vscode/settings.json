@@ -6,7 +6,7 @@
   },
   "editor.formatOnSave": true,
   "editor.detectIndentation": true,
-  "editor.rulers": [80],
+  "editor.rulers": [],
   "editor.tabSize": 2,
   "files.exclude": {
     "USE_GITIGNORE": true
