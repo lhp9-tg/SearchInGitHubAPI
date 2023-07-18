@@ -4,7 +4,26 @@ import { Segment, Input } from 'semantic-ui-react';
 // J'importe les propTypes pour typer les props du composant
 import PropTypes from 'prop-types';
 
+// J'importe les hooks dont j'ai besoin
+// import { useState, useEffect } from 'react';
+
 const InputExampleInput = ({ repo, setRepo }) => {
+  // Truc de fou https://www.freecodecamp.org/news/javascript-debounce-example/
+  // LE DEBOUNCE !
+
+  // const [inputValue, setInputValue] = useState('');
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (inputValue === repo) {
+  //       setRepo(inputValue);
+  //     }
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, [inputValue, repo, setRepo]);
+
+  // Mais marche pas bien ^^
+
   return (
     <Segment>
       <Input
