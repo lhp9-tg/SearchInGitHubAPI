@@ -5,9 +5,9 @@ import { Segment, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 // J'importe les hooks dont j'ai besoin
-// import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-const InputExampleInput = ({ repo, setRepo }) => {
+const InputExampleInput = ({ repo, setRepo, loading }) => {
   // Truc de fou https://www.freecodecamp.org/news/javascript-debounce-example/
   // LE DEBOUNCE !
 
@@ -24,6 +24,13 @@ const InputExampleInput = ({ repo, setRepo }) => {
 
   // Mais marche pas bien ^^
 
+  const [inputValue, setInputValue] = useState('');
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setRepo(inputValue);
+    }
+  };
+
   return (
     <Segment>
       <Input
@@ -32,8 +39,10 @@ const InputExampleInput = ({ repo, setRepo }) => {
         icon="search"
         iconPosition="left"
         placeholder="Search a repository"
-        onChange={(e) => setRepo(e.target.value)}
-        value={repo}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        loading={loading}
+        value={inputValue}
       />
     </Segment>
   );
@@ -45,4 +54,5 @@ export default InputExampleInput;
 InputExampleInput.propTypes = {
   repo: PropTypes.string,
   setRepo: PropTypes.func,
+  loading: PropTypes.bool,
 };

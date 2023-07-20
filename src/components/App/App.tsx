@@ -20,9 +20,10 @@ import { useEffect, useState } from 'react';
 //// GO ////////
 
 function App() {
-  // On initialise les sueStates
+  // On initialise les useStates
   const [repo, setRepo] = useState('');
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   // Avec un placeholder pour l'image du repo si pas d'image dans les datas de l'API
   // On met un tableau car on va récupérer plusieurs repos
@@ -42,10 +43,12 @@ function App() {
     if (!repo || repo === ' ') {
       return;
     }
+
     // Sinon on fait un fetch (sans else car je suis un thug et que je l'ai vu dans un tuto C# surtout ^^)
     async function fetchData() {
+      setLoading(true);
       const response = await fetch(
-        `https://api.github.com/search/repositories?q=${repo}&sort=stars&order=desc`
+        `https://api.github.com/search/repositories?q=${repo}&sort=stars&order=desc&per_page=9`
       );
 
       // Ajout de la gestion de l'erreur 403 (trop de requêtes à l'API Github) comme un Gigachad
@@ -82,6 +85,7 @@ function App() {
         );
         setRepoDescriptions(newRepoDescriptions);
       }
+      setLoading(false);
     }
     fetchData(); // On lance la fonction
   }, [repo]); // On met repo dans le tableau de dépendances pour que le useEffect se lance à chaque fois que repo change
@@ -91,7 +95,7 @@ function App() {
     <>
       <Container>
         <Header />
-        <SearchBar repo={repo} setRepo={setRepo} />
+        <SearchBar repo={repo} setRepo={setRepo} loading={loading} />
         <Message repo={repo} count={count} />
         <ReposResults
           repo={repo}

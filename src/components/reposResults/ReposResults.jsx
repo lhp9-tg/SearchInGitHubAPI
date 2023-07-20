@@ -13,7 +13,7 @@ const CardExampleCard = ({
   repoDescriptions,
 }) => {
   return (
-    <Card.Group centered>
+    <Card.Group centered itemsPerRow={3}>
       {repoIds.map((repoId, index) => (
         <Card key={repoId}>
           <Image src={repoImgUrls[index]} wrapped ui={true} />
